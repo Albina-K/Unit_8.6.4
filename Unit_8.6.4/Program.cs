@@ -14,12 +14,33 @@ namespace Unit_8_6_4
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             string filePath = @"C:\\User\\Luft\\SkillFactoryNew\\students.dat";
-           // Person person = new Person();
-            Person.ReadStudents(filePath);
-            
+            static List<Student> ReadStudents()
+            {
+                var students = new List<Student>();
+
+                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+                {
+                    while (reader.BaseStream.Position < reader.BaseStream.Length)
+                    {
+                        var student = new Student()
+                        {
+                            Name = reader.ReadString(),
+                            Group = reader.ReadString(),
+                            DateOfBirth = DateTime.FromBinary(reader.ReadInt64()),
+                            Grade = reader.ReadDecimal()
+                        };
+
+                        students.Add(student);
+                    }
+                }
+
+                return students;
+
+
+            }
         }
 
     }
@@ -33,7 +54,8 @@ namespace Unit_8_6_4
 
     public class Person
     {
-        public static List<Student> ReadStudents(string filePath)
+        string filePath = @"C:\\User\\Luft\\SkillFactoryNew\\students.dat";
+        public List<Student> ReadStudents()
         {
             var students = new List<Student>();
 
@@ -54,8 +76,11 @@ namespace Unit_8_6_4
             }
 
             return students;
+            
 
         }
+
+
     }
     
 }
