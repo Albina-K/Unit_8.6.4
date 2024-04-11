@@ -8,80 +8,55 @@ using System.Security.Cryptography.X509Certificates;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using System.Runtime.Remoting.Messaging;
 
 
 namespace Unit_8_6_4
 {
-    internal class Program
+    class Program
     {
-        static void Main(string[] args)
-        {
-            string filePath = @"C:\\User\\Luft\\SkillFactoryNew\\students.dat";
-            static List<Student> ReadStudents()
-            {
-                var students = new List<Student>();
+        //const string filePath = @"C:\\User\\Luft\\SkillFactoryNew\\students.dat";
+        //static void Main(string[] args)
+        //{
+        //    ReadStudent();
+        //    СreatingAFolder();
+        //}
+        //static void ReadStudent()
+        //{
+        //    string Name;
+        //    string Group;
+        //    DateTime DateOfBirth;
+        //    decimal Grade;
 
-                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
-                {
-                    while (reader.BaseStream.Position < reader.BaseStream.Length)
-                    {
-                        var student = new Student()
-                        {
-                            Name = reader.ReadString(),
-                            Group = reader.ReadString(),
-                            DateOfBirth = DateTime.FromBinary(reader.ReadInt64()),
-                            Grade = reader.ReadDecimal()
-                        };
+        //    using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+        //    {
+        //        while (reader.BaseStream.Position < reader.BaseStream.Length)
+        //        {
+ 
+        //            Name = reader.ReadString();
+        //            Group = reader.ReadString();
+        //            DateOfBirth = DateTime.FromBinary(reader.ReadInt64());
+        //            Grade = reader.ReadDecimal();
+ 
+        //            Console.WriteLine(Name);
+        //            Console.WriteLine(Group);
+        //            Console.WriteLine(DateOfBirth);
+        //            Console.WriteLine(Grade);
 
-                        students.Add(student);
-                    }
-                }
+        //        }
+                
+        //    }
 
-                return students;
+        //}
 
+        //static void СreatingAFolder()
+        //{
+        //    DirectoryInfo directory = new DirectoryInfo("C:\\Users\\Альбина\\Desktop");
+        //    directory.CreateSubdirectory("Students");
+        //}
+        static List<Student> ReadStu
 
-            }
-        }
-
+       
     }
-    public class Student
-    { 
-            public string Name { get; set; }
-            public string Group { get; set; }
-            public DateTime DateOfBirth { get; set; }
-            public decimal Grade { get; set; }
-    }
-
-    public class Person
-    {
-        string filePath = @"C:\\User\\Luft\\SkillFactoryNew\\students.dat";
-        public List<Student> ReadStudents()
-        {
-            var students = new List<Student>();
-
-            using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
-            {
-                while (reader.BaseStream.Position < reader.BaseStream.Length)
-                {
-                    var student = new Student()
-                    {
-                        Name = reader.ReadString(),
-                        Group = reader.ReadString(),
-                        DateOfBirth = DateTime.FromBinary(reader.ReadInt64()),
-                        Grade = reader.ReadDecimal()
-                    };
-
-                    students.Add(student);
-                }
-            }
-
-            return students;
-            
-
-        }
-
-
-    }
-    
 }
 
