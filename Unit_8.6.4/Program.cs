@@ -18,25 +18,22 @@ namespace Unit_8_6_4
         static void Main(string[] args)
         {
             string filePath = "C:\\User\\Luft\\SkillFactoryNew\\students.dat";
-            string filePath2 = "C:\\Users\\Альбина\\Desktop\\Students";
-            //    directory.CreateSubdirectory("Students");
-
             List<Student> students = ReadStudent(filePath);
+
+            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string filePath2 = Path.Combine(desktop, "Students");
+            Directory.CreateDirectory(filePath2);
+
+            
 
             foreach (Student student in students)
             {
-                File.CreateText(filePath2 + "\\" + student.Group + ".txt");
+                using (StreamWriter cw = File.CreateText(filePath2 + "\\" + student.Group + ".txt"));
             }
-            WriteStudent(students, filePath2);
 
+           var fileGroup = Directory.GetFiles(filePath2);
 
-        }
-        static void WriteStudent(List<Student> students, string path)
-        {
-            var fs = new FileStream(path, FileMode.Open);
-            var fileGroup = Directory.GetFiles(path);
-
-            using (StreamWriter writer = new StreamWriter(fs))
+            using (StreamWriter writer = File.CreateText(filePath2))
             {
                 foreach (Student student in students)
                 {
@@ -52,28 +49,17 @@ namespace Unit_8_6_4
             }
         }
 
-        //static void СreatingAFolder()
-        //{
-        //    DirectoryInfo directory = new DirectoryInfo("C:\\Users\\Альбина\\Desktop");
-        //    directory.CreateSubdirectory("Students");
-        //}
-
         static List<Student> ReadStudent(string filePath)
         {
-            List<Student> students = new List<Student>();
-
-            var fs = FileStream(filePath, FileMode.Open);
-
-            using (StreamReader sr = new StreamReader(fs))
+            var students = new List<Student>();
+            using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
             {
-                fs.Position = 0;
-                BinaryReader br = BinaryReader(fs);
-                while (sr.BaseStream.Position < reader.BaseStream.Length)
+                while (reader.BaseStream.Position < reader.BaseStream.Length)
                 {
                     var student = new Student()
                     {
-                        Student.Name = sr.ReadString(),
-                        Group = sr.ReadString(),
+                        Name = reader.ReadString(),
+                        Group = reader.ReadString(),
                         DateOfBirth = DateTime.FromBinary(reader.ReadInt64()),
                         Grade = reader.ReadDecimal()
                     };
