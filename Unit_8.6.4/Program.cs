@@ -23,29 +23,14 @@ namespace Unit_8_6_4
             string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filePath2 = Path.Combine(desktop, "Students");
             Directory.CreateDirectory(filePath2);
-
-            
-
             foreach (Student student in students)
             {
-                using (StreamWriter cw = File.CreateText(filePath2 + "\\" + student.Group + ".txt"));
-            }
-
-           var fileGroup = Directory.GetFiles(filePath2);
-
-            using (StreamWriter writer = File.CreateText(filePath2))
-            {
-                foreach (Student student in students)
+                using (StreamWriter cw = File.CreateText(filePath2 + "\\" + student.Group + ".txt"))
                 {
-                    foreach (string file in fileGroup)
-                        if (student.Group == file)
-                        {
-                            writer.Write(student.Name);
-                            writer.Write(student.DateOfBirth);
-                            writer.Write(student.Grade);
-                        }
+                    cw.Write(" " + student.Name);
+                    cw.Write(" " + student.DateOfBirth);
+                    cw.Write(" " + student.Grade);
                 }
-
             }
         }
 
@@ -64,13 +49,11 @@ namespace Unit_8_6_4
                         Grade = reader.ReadDecimal()
                     };
                     students.Add(student);
-
                 }
-
             }
             return students;
         }
- 
+
         public class Student
         {
             public string Name { get; set; }
@@ -78,9 +61,8 @@ namespace Unit_8_6_4
             public DateTime DateOfBirth { get; set; }
             public decimal Grade { get; set; }
         }
-
     }
 }
-    
+
 
 
