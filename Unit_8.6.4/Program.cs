@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Runtime.Remoting.Messaging;
+using static Unit_8_6_4.Program;
 
 
 namespace Unit_8_6_4
@@ -20,9 +21,10 @@ namespace Unit_8_6_4
             string filePath = "C:\\User\\Luft\\SkillFactoryNew\\students.dat";
             List<Student> students = ReadStudent(filePath);
 
-            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filePath2 = Path.Combine(desktop, "Students");
-            Directory.CreateDirectory(filePath2);
+            string filePath2 = "C:\\Users\\Альбина\\Desktop\\Students";
+            DirectoryInfo directory = new DirectoryInfo(filePath2);
+            directory.Create();
+
             foreach (Student student in students)
             {
                 using (StreamWriter cw = File.CreateText(filePath2 + "\\" + student.Group + ".txt"))
@@ -36,7 +38,7 @@ namespace Unit_8_6_4
 
         static List<Student> ReadStudent(string filePath)
         {
-            var students = new List<Student>();
+            List<Student> students = new List<Student>();
             using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
             {
                 while (reader.BaseStream.Position < reader.BaseStream.Length)
