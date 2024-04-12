@@ -9,10 +9,10 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Runtime.Remoting.Messaging;
-using static Unit_8_6_4.Program;
+using static Unit864.Program;
 
 
-namespace Unit_8_6_4
+namespace Unit864
 {
     internal class Program
     {
