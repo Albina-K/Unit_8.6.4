@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Runtime.Remoting.Messaging;
 using static Unit864.Program;
+using Unit_8._6._4;
 
 
 namespace Unit864
@@ -29,9 +30,15 @@ namespace Unit864
             {
                 using (StreamWriter cw = File.CreateText(filePath2 + "\\" + student.Group + ".txt"))
                 {
-                    cw.Write(" " + student.Name);
-                    cw.Write(" " + student.DateOfBirth);
-                    cw.Write(" " + student.Grade);
+                    foreach (Student group in students)
+                    {
+                        if (group.Group == student.Group)
+                        {
+                            cw.Write(" " + student.Name);
+                            cw.Write(" " + student.DateOfBirth);
+                            cw.Write(" " + student.Grade);
+                        }
+                    }
                 }
             }
         }
@@ -56,13 +63,6 @@ namespace Unit864
             return students;
         }
 
-        public class Student
-        {
-            public string Name { get; set; }
-            public string Group { get; set; }
-            public DateTime DateOfBirth { get; set; }
-            public decimal Grade { get; set; }
-        }
     }
 }
 
